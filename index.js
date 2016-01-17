@@ -1,5 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var router = express.Router();
+var User     = require('./models/User');
 
 var app = express();
 
@@ -21,6 +23,8 @@ app.get('/', function(request, response) {
 app.get('/cool', function(request, response) {
   response.render('pages/cool');
 });
+
+
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
