@@ -6,9 +6,11 @@ var app = express();
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
+var uri = process.env.MONGOLAB_URI;
 //mongoose.connect('mongodb://127.0.0.1:27017/Rewards')
-mongoose.connect('mongodb://heroku_twxwv1pm:2t6ohiv7m5prj5ke6i6sr4lja6@ds045795.mongolab.com:45795/heroku_twxwv1pm')
-//mongodb://abha.agupta@gmail.com:wazira123@ds045795.mongolab.com:45795/heroku_twxwv1pm
+mongodb.MongoClient.connect(uri, { server: { auto_reconnect: true } }, function (err, db) {
+    /* adventure! */
+});
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
