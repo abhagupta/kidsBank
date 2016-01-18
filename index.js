@@ -4,6 +4,7 @@ var router = express.Router();
 var User     = require('./models/User');
 var Transaction     = require('./models/Transaction');
 var TransactionType    = require('./models/TransactionType');
+var routes =  require('./routes.js')
 
 var app = express();
 
@@ -18,46 +19,7 @@ mongoose.connect(process.env.MONGOLAB_URI || mongoURI);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/', function(request, response) {
-  response.render('pages/index');
-});
-
-app.get('/cool', function(request, response) {
-  response.render('pages/cool');
-});
-
-app.get('/summary/:id?', function(req, res) {
-	 var id = req.params.id;
-        User.findOne({'username': id},function(err, user){
-        	if (err){
-                res.send(err);
-        	}else
-        	res.json(user.totalRewards);
-        })
-})
-
-app.post('/:id/:transactionType',function(req, res){
-    User.findOne({'username': req.params.id},function(err, user){
-    	TransactionType.findOne({'name': req.params.transactionType}, function(err, transactionType){
-    		user.totalRewards = user.totalRewards + transactionType.value;
-    		
-    		user.save(function(err) {
-                res.json(user.totalRewards);
-            });
-             var transaction = new Transaction()
-		        transaction.type = req.params.transactionType
-		        transaction.username= req.params.id
-		        transaction.value=transactionType.value
-		        transaction.date=Date();
-		        transaction.save();
-    	})
-        	
-    })
-
-})
-      
-
-
+routes(app);
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
