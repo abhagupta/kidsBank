@@ -42,6 +42,8 @@ app.post('/:id/:transactionType',function(req, res){
     User.findOne({'username': id},function(err, user){
     	TransactionType.findOne({'name': transactionType}, function(err, transactionType){
     		user.totalRewards = user.totalRewards + transactionType.value;
+    		console.log('User total rewards :' , user.totalRewards );
+    		console.log('transactionType', transactionType)
     		user.save(function(err) {
                 res.json({ message: 'User updated!' });
             });
