@@ -42,7 +42,7 @@ app.post('/:id/:transactionType',function(req, res){
     		user.totalRewards = user.totalRewards + transactionType.value;
     		
     		user.save(function(err) {
-                res.json({ message: 'User updated!' });
+                res.json(user.totalRewards);
             });
              var transaction = new Transaction()
 		        transaction.type = req.params.transactionType
