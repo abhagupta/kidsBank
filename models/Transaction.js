@@ -13,6 +13,10 @@ var TransactionSchema = mongoose.Schema({
         type:String,
         required: true
     },
+    kidsname: {
+        type:String,
+        required: true
+    },
     date: {
         type:Date,
         required: true

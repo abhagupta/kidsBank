@@ -5,7 +5,7 @@ var UserSchema = mongoose.Schema({
 		type:String,
 		required: true
 	},
-    totalRewards: {
+    pin: {
         type:Number,
         required: true
     }
