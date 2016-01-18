@@ -37,16 +37,19 @@ app.get('/summary/:id?', function(req, res) {
 })
 
 app.post('/:id/:transactionType',function(req, res){
-	var id = req.params.id;
-    var transactionType = req.params.transactionType;
-    User.findOne({'username': id},function(err, user){
-    	TransactionType.findOne({'name': transactionType}, function(err, transactionType){
+    User.findOne({'username': req.params.id},function(err, user){
+    	TransactionType.findOne({'name': req.params.transactionType}, function(err, transactionType){
     		user.totalRewards = user.totalRewards + transactionType.value;
-    		console.log('User total rewards :' , user.totalRewards );
-    		console.log('transactionType', transactionType)
+    		
     		user.save(function(err) {
                 res.json({ message: 'User updated!' });
             });
+             var transaction = new Transaction()
+		        transaction.type = req.params.transactionType
+		        transaction.username= req.params.id
+		        transaction.value=transactionType.value
+		        transaction.date=Date();
+		        transaction.save();
     	})
         	
     })
