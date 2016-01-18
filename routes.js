@@ -9,6 +9,10 @@ module.exports = function(app) {
       response.render('pages/index');
     });
 
+    app.get('/gettest', function(request, response) {
+        res.json("get success");
+    });
+
     app.get('/summary/:id?', function(req, res) {
       var id = req.params.id;
             User.findOne({'username': id},function(err, user){

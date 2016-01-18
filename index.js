@@ -11,9 +11,9 @@ var app = express();
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
-var uri = process.env.MONGOLAB_URI;
-var mongoURI = 'mongodb://127.0.0.1:27017/Rewards';
-mongoose.connect(process.env.MONGOLAB_URI || mongoURI);
+//var uri = process.env.MONGOLAB_URI;
+//var mongoURI = 'mongodb://127.0.0.1:27017/Rewards';
+//mongoose.connect(process.env.MONGOLAB_URI || mongoURI);
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
