@@ -24,6 +24,18 @@ app.get('/cool', function(request, response) {
   response.render('pages/cool');
 });
 
+app.get('/summary/:id?', function(req, res) {
+	 var id = req.params.id;
+        User.findOne({'username': id},function(err, user){
+        	if (err){
+                res.send(err);
+        	}else
+        	res.json(user.totalRewards);
+        })
+})
+   
+
+
 
 
 app.listen(app.get('port'), function() {
