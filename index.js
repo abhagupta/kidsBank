@@ -30,7 +30,7 @@ app.get('/summary/:id?', function(req, res) {
         	if (err){
                 res.send(err);
         	}else
-        	res.json(user.totalRewards);
+        	res.json(user);
         })
 })
    
