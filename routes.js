@@ -10,7 +10,7 @@ module.exports = function(app) {
     });
 
     app.get('/gettest', function(request, response) {
-        res.json("get success");
+        response.json("get success");
     });
 
     app.get('/summary/:id?', function(req, res) {
