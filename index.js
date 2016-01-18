@@ -2,6 +2,8 @@ var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 var User     = require('./models/User');
+var Transaction     = require('./models/Transaction');
+var TransactionType    = require('./models/TransactionType');
 
 var app = express();
 
@@ -33,8 +35,22 @@ app.get('/summary/:id?', function(req, res) {
         	res.json(user.totalRewards);
         })
 })
-   
 
+app.post('/:id/:transactionType',function(req, res){
+	var id = req.params.id;
+    var transactionType = req.params.transactionType;
+    User.findOne({'username': id},function(err, user){
+    	TransactionType.findOne({'name': transactionType}, function(err, transactionType){
+    		user.totalRewards = user.totalRewards + transactionType.value;
+    		user.save(function(err) {
+                res.json({ message: 'User updated!' });
+            });
+    	})
+        	
+    })
+
+})
+      
 
 
 
