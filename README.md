@@ -1,16 +1,14 @@
-# node-js-getting-started
+# Kids Bank  
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
-
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+App to support REST API for Kids Bank backend.
 
 ## Running Locally
 
 Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
 
 ```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
+$ git clone https://github.com/abhagupta/kidsBank.git # or clone your own fork
+$ cd kidsBank
 $ npm install
 $ npm start
 ```
@@ -30,10 +28,20 @@ or
 
 ## Documentation
 
-For more information about using Node.js on Heroku, see these Dev Center articles:
+### Current API
 
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+```
+GET /summary/:username/:kidsname - To retrieve total rewards for  a kid under a username (parent)
+ 
+GET  /transactiontype/:username - Retrieve all the transaction type that a username (parent) has created.
+
+GET /transactions/:username/:kidsname - Retrieve transactions for a kid under a username
+
+POST /transaction/:user/:kidsname/:transactionType - Add a transaction for a user for a kid of type
+
+POST /:username/:pin - Add a new username with a pin
+
+POST /:username/kids/:kidsname - Add a kid for a username
+
+POST transactiontype/post/:username  - Add a transaction type 
+```
