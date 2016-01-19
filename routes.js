@@ -97,6 +97,7 @@ module.exports = function(app) {
 
     // Get all transactions for kids
     app.get('/transactions/:username/:kidsname', function(req, res) {
+        console.log('params');
       var username = req.params.username;
       var kidsname = req.params.kidsname;
             Transaction.find({'username': username, kidsname: kidsname},function(err, transactions){
@@ -108,9 +109,8 @@ module.exports = function(app) {
     });
 
     // Not Working -- Create Transaction Type
-    app.post('/transactiontype/:username',function(req, res){
-       console.log(req.params);
-       console.log(req.body);
+    app.post('/transactiontype/post/:username',function(req, res){
+      
         User.findOne({'username': req.params.username},function(err, user){
             if (err){
                     res.send(err);
