@@ -10,8 +10,14 @@ module.exports = function(app) {
       response.render('pages/index');
     });
 
-    app.get('/gettest', function(request, response) {
-        response.json("get success");
+
+    app.get('/:username/kids', function(request, response) {
+        Kid.find({'username': request.params.username},function(err, kids){
+             if (err){
+                    response.send(err);
+             }else
+             response.json(kids);
+            })
     });
 
     // Get summary information for kids
@@ -30,6 +36,12 @@ module.exports = function(app) {
     app.post('/transaction/:user/:kidsname/:transactionType',function(req, res){
         Kid.findOne({'username': req.params.user, 'name' : req.params.kidsname},function(err, kid){
          TransactionType.findOne({'name': req.params.transactionType}, function(err, transactionType){
+              
+              // need to add error handling here. 
+
+              if(err){
+                res.send(err);
+               }
              kid.totalRewards = kid.totalRewards + transactionType.value;
                 
              kid.save(function(err) {
