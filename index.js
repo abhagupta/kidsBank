@@ -1,11 +1,13 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var passport = require('passport')
 var bodyParser = require('body-parser')
 var router = express.Router();
 var User     = require('./models/User');
 var Transaction     = require('./models/Transaction');
 var TransactionType    = require('./models/TransactionType');
 var routes =  require('./routes.js')
+var passportMiddleware = require('./middlewares/passport')
 
 var app = express();
 
@@ -21,12 +23,20 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 // parse application/x-www-form-urlencoded 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
  
 // parse application/json 
 app.use(bodyParser.json())
 
+app.passport = passport
+// Use the passport middleware to enable passport
+app.use(passport.initialize())
+
+// Enable passport persistent sessions
+app.use(passport.session())
+
 routes(app);
+passportMiddleware(app)
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
